@@ -15,13 +15,21 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if Auth.auth().currentUser == nil {
+            Auth.auth().signInAnonymously() { (result, error) in
+                if let error = error {
+                    print("Error signing user anonymously: \(error.localizedDescription)")
+                    return
+                }
+            }
+        }
         
         
     }
     //Called every single time when the view appears
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if let _ = Auth.auth().currentUser {
+        if let user = Auth.auth().currentUser, !user.isAnonymous {
         loginOutButton.title = "Logout"
         } else {
             loginOutButton.title = "Login"
@@ -35,18 +43,37 @@ class HomeViewController: UIViewController {
     }
 
     @IBAction func logInOutPressed(_ sender: UIBarButtonItem) {
-        if let _ = Auth.auth().currentUser {
-            // We are logged in
+        
+        guard let user = Auth.auth().currentUser else { return }
+        
+        if user.isAnonymous {
+            presentLoginController()
+        } else {
             do {
                 try Auth.auth().signOut()
-                presentLoginController()
+                Auth.auth().signInAnonymously { (result, error) in
+                    if let error = error {
+                        print(error.localizedDescription)
+                    }
+                     self.presentLoginController()
+                }
             } catch {
-                print("Error logging user out: \(error.localizedDescription)")
+                print(error)
             }
-        } else {
-            //We are not logged in
-            presentLoginController()
         }
+        
+//        if let _ = Auth.auth().currentUser {
+//            // We are logged in
+//            do {
+//                try Auth.auth().signOut()
+//                presentLoginController()
+//            } catch {
+//                print("Error logging user out: \(error.localizedDescription)")
+//            }
+//        } else {
+//            //We are not logged in
+//            presentLoginController()
+//        }
         
     }
     
