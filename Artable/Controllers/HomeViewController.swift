@@ -14,8 +14,18 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
+    var categories = [Category]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let category = Category.init(name: "Nature", id: "fdjfvdfj", imageUrl: "https://images.unsplash.com/photo-1565207470635-d14c3e9152db?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2734&q=80", isActive: true, timeStamp: Timestamp())
+        
+        categories.append(category)
+        
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(UINib(nibName: Identifiers.CategoryCellNibFile, bundle: nil), forCellWithReuseIdentifier: Identifiers.CategoryCell)
         
         if Auth.auth().currentUser == nil {
             Auth.auth().signInAnonymously() { (result, error) in
@@ -71,3 +81,29 @@ class HomeViewController: UIViewController {
 
 }
 
+extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return categories.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Identifiers.CategoryCell, for: indexPath) as? CategoryCollectionViewCell {
+        
+            cell.configureCell(category: categories[indexPath.item])
+            return cell
+        }
+        
+        return UICollectionViewCell()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = view.frame.width //Getting width of current device
+        let cellWidth = (width - 50) / 2
+        let cellHeight = cellWidth * 1.5
+        
+        return CGSize(width: cellWidth, height: cellHeight)
+    }
+    
+}
