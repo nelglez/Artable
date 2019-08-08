@@ -44,8 +44,9 @@ class HomeViewController: UIViewController {
     }
     //Called every single time when the view appears
     override func viewDidAppear(_ animated: Bool) {
-        fetchCollection()
         super.viewDidAppear(animated)
+        setCategoriesListener()
+        
         if let user = Auth.auth().currentUser, !user.isAnonymous {
         loginOutButton.title = "Logout"
         } else {
@@ -56,6 +57,65 @@ class HomeViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         listener.remove() //Saves you data $$$
+        categories.removeAll()
+        collectionView.reloadData()
+    }
+    
+    
+    
+    private func setCategoriesListener() {
+        listener = db.collection("categories").addSnapshotListener({ (snapshot, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            
+            snapshot?.documentChanges.forEach({ (change) in
+                let data = change.document.data()
+                let category = Category(data: data)
+                
+                switch change.type {
+                case .added:
+                    self.onDocumentAdded(change: change, category: category)
+                case .modified:
+                    self.onDocumentModified(change: change, category: category)
+                case .removed:
+                    self.onDocumentRemoved(change: change)
+                }
+                
+            })
+        })
+    }
+    
+    private func onDocumentAdded(change: DocumentChange, category: Category) {
+        let newIndex = Int(change.newIndex)
+        categories.insert(category, at: newIndex)
+        collectionView.insertItems(at: [IndexPath(item: newIndex, section: 0)])
+    }
+    
+    private func onDocumentModified(change: DocumentChange, category: Category) {
+        if change.newIndex == change.oldIndex {
+            //Item changed but it is still in the same position
+            let index = Int(change.newIndex)
+            categories[index] = category
+            collectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
+        } else {
+            //Item changed and changed position
+            let oldIndex = Int(change.oldIndex)
+            let newIndex = Int(change.newIndex)
+            
+            categories.remove(at: oldIndex)
+            categories.insert(category, at: newIndex)
+            
+            collectionView.moveItem(at: IndexPath(item: oldIndex, section: 0), to: IndexPath(item: newIndex, section: 0))
+        }
+    }
+    
+    private func onDocumentRemoved(change: DocumentChange) {
+    let oldIndex = Int(change.oldIndex)
+        categories.remove(at: oldIndex)
+        collectionView.deleteItems(at: [IndexPath(item: oldIndex, section: 0)])
+        
     }
     
     private func presentLoginController() {
@@ -64,45 +124,7 @@ class HomeViewController: UIViewController {
         present(controller, animated: true, completion: nil)
     }
     
-    private func fetchDocument() {
-        let docRef = db.collection("categories").document("MbjP1DgbKzEsM98fG2UR") // reference to the database
-        
-        docRef.addSnapshotListener { (snapshot, error) in
-            self.categories.removeAll()
-            guard let data = snapshot?.data() else { return }
-            
-            let newCategory = Category(data: data)
-            self.categories.append(newCategory)
-            self.collectionView.reloadData()
-        }
-        
-//        docRef.getDocument { (snapshot, error) in
-//
-//            guard let data = snapshot?.data() else { return }
-//
-//            let newCategory = Category(data: data)
-//            self.categories.append(newCategory)
-//            self.collectionView.reloadData()
-//        }
-        
-    }
-    
-    private func fetchCollection() {
-        let collectionReference = db.collection("categories")
-        
-        
-        
-       listener = collectionReference.addSnapshotListener { (snapshot, error) in
-            guard let documents = snapshot?.documents else { return }
-            self.categories.removeAll()
-            for doc in documents {
-                let data = doc.data()
-                let newCategory = Category(data: data)
-                self.categories.append(newCategory)
-            }
-            self.collectionView.reloadData()
-        }
-    }
+
 
     @IBAction func logInOutPressed(_ sender: UIBarButtonItem) {
         
@@ -172,3 +194,48 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
 }
+
+//Prior Code Left for reference
+
+//    private func fetchDocument() {
+//        let docRef = db.collection("categories").document("MbjP1DgbKzEsM98fG2UR") // reference to the database
+//
+//        docRef.addSnapshotListener { (snapshot, error) in
+//            self.categories.removeAll()
+//            guard let data = snapshot?.data() else { return }
+//
+//            let newCategory = Category(data: data)
+//            self.categories.append(newCategory)
+//            self.collectionView.reloadData()
+//        }
+//
+////        docRef.getDocument { (snapshot, error) in
+////
+////            guard let data = snapshot?.data() else { return }
+////
+////            let newCategory = Category(data: data)
+////            self.categories.append(newCategory)
+////            self.collectionView.reloadData()
+////        }
+//
+//    }
+//
+//    private func fetchCollection() {
+//        let collectionReference = db.collection("categories")
+//
+//
+//
+//       listener = collectionReference.addSnapshotListener { (snapshot, error) in
+//            guard let documents = snapshot?.documents else { return }
+//
+//        print(snapshot?.documentChanges.count)
+//
+//            self.categories.removeAll()
+//            for doc in documents {
+//                let data = doc.data()
+//                let newCategory = Category(data: data)
+//                self.categories.append(newCategory)
+//            }
+//            self.collectionView.reloadData()
+//        }
+//    }
