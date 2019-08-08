@@ -37,8 +37,9 @@ class LoginViewController: UIViewController {
                 strongSelf.activityIndicator.stopAnimating()
                 return
             }
-            print("Login was successful!")
+            
             strongSelf.activityIndicator.stopAnimating()
+            strongSelf.dismiss(animated: true, completion: nil) //dismiss the etire navigation controllers
         }
     }
     @IBAction func guestButtonPressed(_ sender: UIButton) {
