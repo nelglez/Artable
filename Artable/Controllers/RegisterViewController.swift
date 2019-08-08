@@ -73,7 +73,7 @@ class RegisterViewController: UIViewController {
         authUser.link(with: credential) { (result, error) in
             if let error = error {
                 print("Error signing user up with email and password: \(error.localizedDescription)")
-                self.handleFireAuthError(error: error)
+                Auth.auth().handleFireAuthError(error: error, vc: self)
                 return
             }
             

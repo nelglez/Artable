@@ -40,7 +40,7 @@ class LoginViewController: UIViewController {
            guard let strongSelf = self else { return }
             if let error = error {
                 print("Error signing user in with email and password: \(error.localizedDescription)")
-                strongSelf.handleFireAuthError(error: error)
+                Auth.auth().handleFireAuthError(error: error, vc: strongSelf)
                 strongSelf.activityIndicator.stopAnimating()
                 return
             }
