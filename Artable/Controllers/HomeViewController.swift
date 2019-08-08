@@ -15,9 +15,13 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var categories = [Category]()
+    var selectedCategory: Category!
+    var db: Firestore!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        db = Firestore.firestore()
         
         let category = Category.init(name: "Nature", id: "fdjfvdfj", imageUrl: "https://images.unsplash.com/photo-1565207470635-d14c3e9152db?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2734&q=80", isActive: true, timeStamp: Timestamp())
         
@@ -37,6 +41,7 @@ class HomeViewController: UIViewController {
             }
         }
         
+        fetchDocument()
         
     }
     //Called every single time when the view appears
@@ -53,6 +58,23 @@ class HomeViewController: UIViewController {
         let storyboard = UIStoryboard(name: Storyboard.LoginStoryboard, bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: StoryboardId.LoginVC)
         present(controller, animated: true, completion: nil)
+    }
+    
+    private func fetchDocument() {
+        let docRef = db.collection("categories").document("MbjP1DgbKzEsM98fG2UR") // reference to the database
+        docRef.getDocument { (snapshot, error) in
+            guard let data = snapshot?.data() else { return }
+            let name = data["name"] as? String ?? ""
+            let id = data["id"] as? String ?? ""
+            let imageUrl = data["imageUrl"] as? String ?? ""
+            let isActive = data["isActive"] as? Bool ?? true
+            let timeStamp = data["timeStamp"] as? Timestamp ?? Timestamp()
+            
+            let newCategory = Category(name: name, id: id, imageUrl: imageUrl, isActive: isActive, timeStamp: timeStamp)
+            self.categories.append(newCategory)
+            self.collectionView.reloadData()
+        }
+        
     }
 
     @IBAction func logInOutPressed(_ sender: UIBarButtonItem) {
@@ -100,10 +122,26 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = view.frame.width //Getting width of current device
-        let cellWidth = (width - 50) / 2
+        let cellWidth = (width - 30) / 2
         let cellHeight = cellWidth * 1.5
         
         return CGSize(width: cellWidth, height: cellHeight)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        selectedCategory = categories[indexPath.item]
+        
+        performSegue(withIdentifier: Segues.ToProducts, sender: self)
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Segues.ToProducts {
+            if let destinationVC = segue.destination as? ProductsViewController {
+                destinationVC.category = selectedCategory
+            }
+        }
     }
     
 }
