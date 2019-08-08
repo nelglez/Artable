@@ -30,4 +30,10 @@ struct AppColors {
 struct Identifiers {
     static let CategoryCell = "CategoryCell"
     static let CategoryCellNibFile = "CategoryCollectionViewCell"
+    static let ProductCell = "ProductCell"
+    static let ProductCellNibFile = "ProductTableViewCell"
+}
+
+struct Segues {
+    static let ToProducts = "ToProductsVC"
 }
