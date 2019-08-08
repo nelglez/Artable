@@ -34,12 +34,13 @@ class LoginViewController: UIViewController {
            guard let strongSelf = self else { return }
             if let error = error {
                 print("Error signing user in with email and password: \(error.localizedDescription)")
+                strongSelf.handleFireAuthError(error: error)
                 strongSelf.activityIndicator.stopAnimating()
                 return
             }
             
             strongSelf.activityIndicator.stopAnimating()
-            strongSelf.dismiss(animated: true, completion: nil) //dismiss the etire navigation controllers
+            strongSelf.dismiss(animated: true, completion: nil) //dismiss the entire navigation controllers
         }
     }
     @IBAction func guestButtonPressed(_ sender: UIButton) {
