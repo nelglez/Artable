@@ -11,6 +11,8 @@ import Firebase
 
 class HomeViewController: UIViewController {
     @IBOutlet weak var loginOutButton: UIBarButtonItem!
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,20 +66,6 @@ class HomeViewController: UIViewController {
                 Auth.auth().handleFireAuthError(error: error, vc: self)
             }
         }
-        
-//        if let _ = Auth.auth().currentUser {
-//            // We are logged in
-//            do {
-//                try Auth.auth().signOut()
-//                presentLoginController()
-//            } catch {
-//                print("Error logging user out: \(error.localizedDescription)")
-//            }
-//        } else {
-//            //We are not logged in
-//            presentLoginController()
-//        }
-        
     }
     
 
