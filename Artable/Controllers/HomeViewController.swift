@@ -17,6 +17,7 @@ class HomeViewController: UIViewController {
     var categories = [Category]()
     var selectedCategory: Category!
     var db: Firestore!
+    var listener: ListenerRegistration!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,18 +38,24 @@ class HomeViewController: UIViewController {
             }
         }
         
-      //  fetchDocument()
-        fetchCollection()
+      
+       
         
     }
     //Called every single time when the view appears
     override func viewDidAppear(_ animated: Bool) {
+        fetchCollection()
         super.viewDidAppear(animated)
         if let user = Auth.auth().currentUser, !user.isAnonymous {
         loginOutButton.title = "Logout"
         } else {
             loginOutButton.title = "Login"
         }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        listener.remove() //Saves you data $$$
     }
     
     private func presentLoginController() {
@@ -59,8 +66,9 @@ class HomeViewController: UIViewController {
     
     private func fetchDocument() {
         let docRef = db.collection("categories").document("MbjP1DgbKzEsM98fG2UR") // reference to the database
-        docRef.getDocument { (snapshot, error) in
-            
+        
+        docRef.addSnapshotListener { (snapshot, error) in
+            self.categories.removeAll()
             guard let data = snapshot?.data() else { return }
             
             let newCategory = Category(data: data)
@@ -68,14 +76,25 @@ class HomeViewController: UIViewController {
             self.collectionView.reloadData()
         }
         
+//        docRef.getDocument { (snapshot, error) in
+//
+//            guard let data = snapshot?.data() else { return }
+//
+//            let newCategory = Category(data: data)
+//            self.categories.append(newCategory)
+//            self.collectionView.reloadData()
+//        }
+        
     }
     
     private func fetchCollection() {
         let collectionReference = db.collection("categories")
         
-        collectionReference.getDocuments { (snapshot, error) in
+        
+        
+       listener = collectionReference.addSnapshotListener { (snapshot, error) in
             guard let documents = snapshot?.documents else { return }
-            
+            self.categories.removeAll()
             for doc in documents {
                 let data = doc.data()
                 let newCategory = Category(data: data)
