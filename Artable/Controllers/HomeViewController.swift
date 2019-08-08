@@ -23,10 +23,6 @@ class HomeViewController: UIViewController {
         
         db = Firestore.firestore()
         
-        let category = Category.init(name: "Nature", id: "fdjfvdfj", imageUrl: "https://images.unsplash.com/photo-1565207470635-d14c3e9152db?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2734&q=80", isActive: true, timeStamp: Timestamp())
-        
-        categories.append(category)
-        
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(UINib(nibName: Identifiers.CategoryCellNibFile, bundle: nil), forCellWithReuseIdentifier: Identifiers.CategoryCell)
@@ -63,14 +59,10 @@ class HomeViewController: UIViewController {
     private func fetchDocument() {
         let docRef = db.collection("categories").document("MbjP1DgbKzEsM98fG2UR") // reference to the database
         docRef.getDocument { (snapshot, error) in
-            guard let data = snapshot?.data() else { return }
-            let name = data["name"] as? String ?? ""
-            let id = data["id"] as? String ?? ""
-            let imageUrl = data["imageUrl"] as? String ?? ""
-            let isActive = data["isActive"] as? Bool ?? true
-            let timeStamp = data["timeStamp"] as? Timestamp ?? Timestamp()
             
-            let newCategory = Category(name: name, id: id, imageUrl: imageUrl, isActive: isActive, timeStamp: timeStamp)
+            guard let data = snapshot?.data() else { return }
+            
+            let newCategory = Category(data: data)
             self.categories.append(newCategory)
             self.collectionView.reloadData()
         }
