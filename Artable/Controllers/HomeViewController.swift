@@ -37,7 +37,8 @@ class HomeViewController: UIViewController {
             }
         }
         
-        fetchDocument()
+      //  fetchDocument()
+        fetchCollection()
         
     }
     //Called every single time when the view appears
@@ -67,6 +68,21 @@ class HomeViewController: UIViewController {
             self.collectionView.reloadData()
         }
         
+    }
+    
+    private func fetchCollection() {
+        let collectionReference = db.collection("categories")
+        
+        collectionReference.getDocuments { (snapshot, error) in
+            guard let documents = snapshot?.documents else { return }
+            
+            for doc in documents {
+                let data = doc.data()
+                let newCategory = Category(data: data)
+                self.categories.append(newCategory)
+            }
+            self.collectionView.reloadData()
+        }
     }
 
     @IBAction func logInOutPressed(_ sender: UIBarButtonItem) {
