@@ -54,7 +54,15 @@ class RegisterViewController: UIViewController {
     
 
     private func signUpNewUser() {
-        guard let username = usernameTextField.text, username.isNotEmpty, let email = emailTextField.text, email.isNotEmpty, let password = passwordTextField.text, password.isNotEmpty else { return }
+        guard let username = usernameTextField.text, username.isNotEmpty, let email = emailTextField.text, email.isNotEmpty, let password = passwordTextField.text, password.isNotEmpty else {
+            simpleAlert(title: "Error", message: "Please fill out all fields.")
+            return
+        }
+        
+        guard let confirmPasswords = confirmPasswordTextField.text, confirmPasswords == password else {
+            simpleAlert(title: "Error", message: "Passwords do not match.")
+            return
+        }
         
         activityIndicator.startAnimating()
         
@@ -65,6 +73,7 @@ class RegisterViewController: UIViewController {
         authUser.link(with: credential) { (result, error) in
             if let error = error {
                 print("Error signing user up with email and password: \(error.localizedDescription)")
+                self.handleFireAuthError(error: error)
                 return
             }
             

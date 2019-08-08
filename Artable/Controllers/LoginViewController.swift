@@ -26,7 +26,10 @@ class LoginViewController: UIViewController {
     
     @IBAction func loginButtonPressed(_ sender: UIButton) {
         
-        guard let email = emailTextField.text, email.isNotEmpty, let password = passwordTextField.text, password.isNotEmpty else { return }
+        guard let email = emailTextField.text, email.isNotEmpty, let password = passwordTextField.text, password.isNotEmpty else {
+            simpleAlert(title: "Error", message: "Please fill out all fields.")
+            return
+        }
         
         activityIndicator.startAnimating()
         

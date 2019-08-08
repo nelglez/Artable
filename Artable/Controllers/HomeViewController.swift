@@ -19,6 +19,7 @@ class HomeViewController: UIViewController {
             Auth.auth().signInAnonymously() { (result, error) in
                 if let error = error {
                     print("Error signing user anonymously: \(error.localizedDescription)")
+                    self.handleFireAuthError(error: error)
                     return
                 }
             }
@@ -54,11 +55,13 @@ class HomeViewController: UIViewController {
                 Auth.auth().signInAnonymously { (result, error) in
                     if let error = error {
                         print(error.localizedDescription)
+                        self.handleFireAuthError(error: error)
                     }
                      self.presentLoginController()
                 }
             } catch {
                 print(error)
+                self.handleFireAuthError(error: error)
             }
         }
         
