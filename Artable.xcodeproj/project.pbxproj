@@ -35,6 +35,8 @@
 		7A01D0F522FC904F006A93B3 /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A01D0F222FC904F006A93B3 /* ProductTableViewCell.swift */; };
 		7A01D0F622FC904F006A93B3 /* ProductTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A01D0F322FC904F006A93B3 /* ProductTableViewCell.xib */; };
 		7A01D0F722FC904F006A93B3 /* ProductTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A01D0F322FC904F006A93B3 /* ProductTableViewCell.xib */; };
+		7A01D0FA22FDA41D006A93B3 /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A01D0F822FDA41D006A93B3 /* ProductDetailViewController.swift */; };
+		7A01D0FB22FDA41D006A93B3 /* ProductDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A01D0F922FDA41D006A93B3 /* ProductDetailViewController.xib */; };
 		7A4C7EA222FB591000C88521 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4C7EA122FB591000C88521 /* AppDelegate.swift */; };
 		7A4C7EA422FB591000C88521 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4C7EA322FB591000C88521 /* HomeViewController.swift */; };
 		7A4C7EA722FB591000C88521 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A4C7EA522FB591000C88521 /* Main.storyboard */; };
@@ -69,6 +71,8 @@
 		7A01D0EF22FC8F95006A93B3 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		7A01D0F222FC904F006A93B3 /* ProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
 		7A01D0F322FC904F006A93B3 /* ProductTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductTableViewCell.xib; sourceTree = "<group>"; };
+		7A01D0F822FDA41D006A93B3 /* ProductDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewController.swift; sourceTree = "<group>"; };
+		7A01D0F922FDA41D006A93B3 /* ProductDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductDetailViewController.xib; sourceTree = "<group>"; };
 		7A4C7E9E22FB591000C88521 /* Artable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Artable.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A4C7EA122FB591000C88521 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7A4C7EA322FB591000C88521 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -180,6 +184,8 @@
 			children = (
 				7A01D0DA22FC7854006A93B3 /* ForgotPasswordViewController.swift */,
 				7A01D0DB22FC7854006A93B3 /* ForgotPasswordViewController.xib */,
+				7A01D0F822FDA41D006A93B3 /* ProductDetailViewController.swift */,
+				7A01D0F922FDA41D006A93B3 /* ProductDetailViewController.xib */,
 			);
 			path = XIB;
 			sourceTree = "<group>";
@@ -350,6 +356,7 @@
 				7A4C7EAC22FB591200C88521 /* LaunchScreen.storyboard in Resources */,
 				7A4C7EA922FB591200C88521 /* Assets.xcassets in Resources */,
 				7A01D0C522FC4531006A93B3 /* GoogleService-Info.plist in Resources */,
+				7A01D0FB22FDA41D006A93B3 /* ProductDetailViewController.xib in Resources */,
 				7A01D0F622FC904F006A93B3 /* ProductTableViewCell.xib in Resources */,
 				7A4C7EA722FB591000C88521 /* Main.storyboard in Resources */,
 				7A01D0C322FB5E07006A93B3 /* LoginStoryboard.storyboard in Resources */,
@@ -459,6 +466,7 @@
 			files = (
 				7A01D0DC22FC7854006A93B3 /* ForgotPasswordViewController.swift in Sources */,
 				7A01D0E222FC81F3006A93B3 /* Category.swift in Sources */,
+				7A01D0FA22FDA41D006A93B3 /* ProductDetailViewController.swift in Sources */,
 				7A01D0D322FC4FB4006A93B3 /* Extensions.swift in Sources */,
 				7A01D0CE22FC4A8F006A93B3 /* LoginViewController.swift in Sources */,
 				7A4C7EA422FB591000C88521 /* HomeViewController.swift in Sources */,

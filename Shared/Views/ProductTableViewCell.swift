@@ -24,7 +24,11 @@ class ProductTableViewCell: UITableViewCell {
     
     func configureCell(product: Product) {
         productTitleLabel.text = product.name
-        productPriceLabel.text = String(product.price)
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        if let price = formatter.string(from: product.price as NSNumber) {
+            productPriceLabel.text = price
+        }
         if let url = URL(string: product.imageUrl) {
             productImage.kf.setImage(with: url)
         }
