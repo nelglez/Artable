@@ -37,7 +37,7 @@ class ProductsViewController: UIViewController {
     }
     
     private func setProductsListener() {
-        listener = db.products.addSnapshotListener({ (snapshot, error) in
+        listener = db.products(category: category.id).addSnapshotListener({ (snapshot, error) in
             if let error = error {
                 print(error.localizedDescription)
                 return
