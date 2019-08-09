@@ -24,23 +24,10 @@ class HomeViewController: UIViewController {
         
         db = Firestore.firestore()
         
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.register(UINib(nibName: Identifiers.CategoryCellNibFile, bundle: nil), forCellWithReuseIdentifier: Identifiers.CategoryCell)
+        setupCollectionView()
         
-        if Auth.auth().currentUser == nil {
-            Auth.auth().signInAnonymously() { (result, error) in
-                if let error = error {
-                    print("Error signing user anonymously: \(error.localizedDescription)")
-                    Auth.auth().handleFireAuthError(error: error, vc: self)
-                    return
-                }
-            }
-        }
-        
-      
-       
-        
+        setupInitialAnonymousUser()
+    
     }
     //Called every single time when the view appears
     override func viewDidAppear(_ animated: Bool) {
@@ -61,10 +48,29 @@ class HomeViewController: UIViewController {
         collectionView.reloadData()
     }
     
+   
+    private func setupInitialAnonymousUser() {
+        if Auth.auth().currentUser == nil {
+            Auth.auth().signInAnonymously() { (result, error) in
+                if let error = error {
+                    print("Error signing user anonymously: \(error.localizedDescription)")
+                    Auth.auth().handleFireAuthError(error: error, vc: self)
+                    return
+                }
+            }
+        }
+    }
+    
+    
+    private func setupCollectionView() {
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(UINib(nibName: Identifiers.CategoryCellNibFile, bundle: nil), forCellWithReuseIdentifier: Identifiers.CategoryCell)
+    }
     
     
     private func setCategoriesListener() {
-        listener = db.collection("categories").order(by: "timeStamp", descending: true).addSnapshotListener({ (snapshot, error) in
+        listener = db.categories.addSnapshotListener({ (snapshot, error) in
             if let error = error {
                 print(error.localizedDescription)
                 return
@@ -87,36 +93,7 @@ class HomeViewController: UIViewController {
         })
     }
     
-    private func onDocumentAdded(change: DocumentChange, category: Category) {
-        let newIndex = Int(change.newIndex)
-        categories.insert(category, at: newIndex)
-        collectionView.insertItems(at: [IndexPath(item: newIndex, section: 0)])
-    }
-    
-    private func onDocumentModified(change: DocumentChange, category: Category) {
-        if change.newIndex == change.oldIndex {
-            //Item changed but it is still in the same position
-            let index = Int(change.newIndex)
-            categories[index] = category
-            collectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
-        } else {
-            //Item changed and changed position
-            let oldIndex = Int(change.oldIndex)
-            let newIndex = Int(change.newIndex)
-            
-            categories.remove(at: oldIndex)
-            categories.insert(category, at: newIndex)
-            
-            collectionView.moveItem(at: IndexPath(item: oldIndex, section: 0), to: IndexPath(item: newIndex, section: 0))
-        }
-    }
-    
-    private func onDocumentRemoved(change: DocumentChange) {
-    let oldIndex = Int(change.oldIndex)
-        categories.remove(at: oldIndex)
-        collectionView.deleteItems(at: [IndexPath(item: oldIndex, section: 0)])
-        
-    }
+  
     
     private func presentLoginController() {
         let storyboard = UIStoryboard(name: Storyboard.LoginStoryboard, bundle: nil)
@@ -153,6 +130,38 @@ class HomeViewController: UIViewController {
 }
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    
+    private func onDocumentAdded(change: DocumentChange, category: Category) {
+        let newIndex = Int(change.newIndex)
+        categories.insert(category, at: newIndex)
+        collectionView.insertItems(at: [IndexPath(item: newIndex, section: 0)])
+    }
+    
+    private func onDocumentModified(change: DocumentChange, category: Category) {
+        if change.newIndex == change.oldIndex {
+            //Item changed but it is still in the same position
+            let index = Int(change.newIndex)
+            categories[index] = category
+            collectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
+        } else {
+            //Item changed and changed position
+            let oldIndex = Int(change.oldIndex)
+            let newIndex = Int(change.newIndex)
+            
+            categories.remove(at: oldIndex)
+            categories.insert(category, at: newIndex)
+            
+            collectionView.moveItem(at: IndexPath(item: oldIndex, section: 0), to: IndexPath(item: newIndex, section: 0))
+        }
+    }
+    
+    private func onDocumentRemoved(change: DocumentChange) {
+        let oldIndex = Int(change.oldIndex)
+        categories.remove(at: oldIndex)
+        collectionView.deleteItems(at: [IndexPath(item: oldIndex, section: 0)])
+        
+    }
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
