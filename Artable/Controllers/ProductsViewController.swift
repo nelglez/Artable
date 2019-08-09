@@ -29,6 +29,13 @@ class ProductsViewController: UIViewController {
         
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        listener.remove() //Saves you data $$$
+        products.removeAll()
+        tableView.reloadData()
+    }
+    
     private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self

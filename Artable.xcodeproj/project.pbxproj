@@ -37,13 +37,19 @@
 		7A01D0F722FC904F006A93B3 /* ProductTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A01D0F322FC904F006A93B3 /* ProductTableViewCell.xib */; };
 		7A01D0FA22FDA41D006A93B3 /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A01D0F822FDA41D006A93B3 /* ProductDetailViewController.swift */; };
 		7A01D0FB22FDA41D006A93B3 /* ProductDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A01D0F922FDA41D006A93B3 /* ProductDetailViewController.xib */; };
+		7A01D0FD22FDACF6006A93B3 /* AdminHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A01D0FC22FDACF6006A93B3 /* AdminHomeViewController.swift */; };
+		7A01D0FE22FDAD1E006A93B3 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4C7EA322FB591000C88521 /* HomeViewController.swift */; };
+		7A01D0FF22FDADED006A93B3 /* RoundedViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A01D0D722FC55DD006A93B3 /* RoundedViews.swift */; };
+		7A01D10022FDAE17006A93B3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A01D0D422FC5364006A93B3 /* Constants.swift */; };
+		7A01D10122FDAE21006A93B3 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A01D0D222FC4FB4006A93B3 /* Extensions.swift */; };
+		7A01D10222FDAE3F006A93B3 /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A01D0F822FDA41D006A93B3 /* ProductDetailViewController.swift */; };
+		7A01D10322FDAE52006A93B3 /* ProductDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A01D0F922FDA41D006A93B3 /* ProductDetailViewController.xib */; };
 		7A4C7EA222FB591000C88521 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4C7EA122FB591000C88521 /* AppDelegate.swift */; };
 		7A4C7EA422FB591000C88521 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4C7EA322FB591000C88521 /* HomeViewController.swift */; };
 		7A4C7EA722FB591000C88521 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A4C7EA522FB591000C88521 /* Main.storyboard */; };
 		7A4C7EA922FB591200C88521 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A4C7EA822FB591200C88521 /* Assets.xcassets */; };
 		7A4C7EAC22FB591200C88521 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A4C7EAA22FB591200C88521 /* LaunchScreen.storyboard */; };
 		7A4C7EBA22FB594000C88521 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4C7EB922FB594000C88521 /* AppDelegate.swift */; };
-		7A4C7EBC22FB594000C88521 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4C7EBB22FB594000C88521 /* ViewController.swift */; };
 		7A4C7EBF22FB594000C88521 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A4C7EBD22FB594000C88521 /* Main.storyboard */; };
 		7A4C7EC422FB594200C88521 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A4C7EC222FB594200C88521 /* LaunchScreen.storyboard */; };
 		DF78530959F3EF7BF9639C67 /* Pods_ArtableAdmin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E235FC5C604787C0DE556CD5 /* Pods_ArtableAdmin.framework */; };
@@ -73,6 +79,7 @@
 		7A01D0F322FC904F006A93B3 /* ProductTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductTableViewCell.xib; sourceTree = "<group>"; };
 		7A01D0F822FDA41D006A93B3 /* ProductDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewController.swift; sourceTree = "<group>"; };
 		7A01D0F922FDA41D006A93B3 /* ProductDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductDetailViewController.xib; sourceTree = "<group>"; };
+		7A01D0FC22FDACF6006A93B3 /* AdminHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminHomeViewController.swift; sourceTree = "<group>"; };
 		7A4C7E9E22FB591000C88521 /* Artable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Artable.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A4C7EA122FB591000C88521 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7A4C7EA322FB591000C88521 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -82,7 +89,6 @@
 		7A4C7EAD22FB591200C88521 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7A4C7EB722FB594000C88521 /* ArtableAdmin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArtableAdmin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A4C7EB922FB594000C88521 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7A4C7EBB22FB594000C88521 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		7A4C7EBE22FB594000C88521 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7A4C7EC322FB594200C88521 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7A4C7EC522FB594200C88521 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -238,7 +244,7 @@
 			isa = PBXGroup;
 			children = (
 				7A4C7EB922FB594000C88521 /* AppDelegate.swift */,
-				7A4C7EBB22FB594000C88521 /* ViewController.swift */,
+				7A01D0FC22FDACF6006A93B3 /* AdminHomeViewController.swift */,
 				7A4C7EBD22FB594000C88521 /* Main.storyboard */,
 				7A4C7EC222FB594200C88521 /* LaunchScreen.storyboard */,
 				7A01D0C622FC46A6006A93B3 /* GoogleService-Info.plist */,
@@ -370,6 +376,7 @@
 				7A4C7EC422FB594200C88521 /* LaunchScreen.storyboard in Resources */,
 				7A01D0F722FC904F006A93B3 /* ProductTableViewCell.xib in Resources */,
 				7A01D0E922FC82BA006A93B3 /* CategoryCollectionViewCell.xib in Resources */,
+				7A01D10322FDAE52006A93B3 /* ProductDetailViewController.xib in Resources */,
 				7A01D0C722FC46A6006A93B3 /* GoogleService-Info.plist in Resources */,
 				7A01D0C122FB5A39006A93B3 /* Assets.xcassets in Resources */,
 				7A4C7EBF22FB594000C88521 /* Main.storyboard in Resources */,
@@ -487,10 +494,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A01D0EE22FC8F36006A93B3 /* ProductsViewController.swift in Sources */,
+				7A01D10022FDAE17006A93B3 /* Constants.swift in Sources */,
+				7A01D0FD22FDACF6006A93B3 /* AdminHomeViewController.swift in Sources */,
+				7A01D0FF22FDADED006A93B3 /* RoundedViews.swift in Sources */,
+				7A01D10222FDAE3F006A93B3 /* ProductDetailViewController.swift in Sources */,
 				7A01D0F522FC904F006A93B3 /* ProductTableViewCell.swift in Sources */,
-				7A4C7EBC22FB594000C88521 /* ViewController.swift in Sources */,
 				7A01D0EB22FC8490006A93B3 /* CategoryCollectionViewCell.swift in Sources */,
 				7A01D0E022FC7ED1006A93B3 /* Firebase+Utilities.swift in Sources */,
+				7A01D10122FDAE21006A93B3 /* Extensions.swift in Sources */,
+				7A01D0FE22FDAD1E006A93B3 /* HomeViewController.swift in Sources */,
 				7A4C7EBA22FB594000C88521 /* AppDelegate.swift in Sources */,
 				7A01D0E322FC81F3006A93B3 /* Category.swift in Sources */,
 				7A01D0F122FC8F95006A93B3 /* Product.swift in Sources */,
