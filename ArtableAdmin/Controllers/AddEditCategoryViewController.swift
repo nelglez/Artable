@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseStorage
+import FirebaseFirestore
 
 class AddEditCategoryViewController: UIViewController {
     @IBOutlet weak var nameTextField: UITextField!
@@ -52,31 +53,45 @@ class AddEditCategoryViewController: UIViewController {
         imageRef.putData(imageData, metadata: metaData) { (metaData, error) in
             if let error = error {
                 print(error.localizedDescription)
-                self.simpleAlert(title: "Error", message: "Unable to upload image.")
-                self.activityIndicator.stopAnimating()
+                self.handleError(error: error, message: "Unable to upload image.")
                 return
             }
             //retrieve the download url.
             imageRef.downloadURL(completion: { (url, error) in
                 if let error = error {
                     print(error.localizedDescription)
-                    self.simpleAlert(title: "Error", message: "Unable to upload image.")
-                    self.activityIndicator.stopAnimating()
+                   self.handleError(error: error, message: "Unable to retrive image url.")
                     return
                 }
                 guard let url = url else { return }
-                
-                print("URL: \(url)")
-                
                 //upload new category document to the firestore category collection
+                self.uploadDocument(url: url.absoluteString)
             })
         }
     }
     
-    private func uploadDocument() {
+    private func uploadDocument(url: String) {
+        var docRef: DocumentReference!
+        var category = Category(name: nameTextField.text!, id: "", imageUrl: url, timeStamp: Timestamp())
+        docRef = Firestore.firestore().collection("categories").document() //new document
+        category.id = docRef.documentID
         
+        let data = Category.modelToData(category: category)
+        
+        docRef.setData(data, merge: true) { (error) in
+            if let error = error {
+                print(error.localizedDescription)
+                self.handleError(error: error, message: "Unable to upload new category to firestore.")
+                return
+            }
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
+    private func handleError(error: Error, message: String) {
+        self.simpleAlert(title: "Error", message: message)
+        self.activityIndicator.stopAnimating()
+    }
 
 }
 
