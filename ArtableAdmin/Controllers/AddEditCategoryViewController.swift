@@ -15,6 +15,7 @@ class AddEditCategoryViewController: UIViewController {
     @IBOutlet weak var categoryImage: RoundedImageView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
+    var categoryToEdit: Category?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +24,8 @@ class AddEditCategoryViewController: UIViewController {
         tap.numberOfTapsRequired = 1
         categoryImage.isUserInteractionEnabled = true
         categoryImage.addGestureRecognizer(tap)
+        
+        navigationItem.backBarButtonItem?.tintColor = UIColor.white
     }
     
     @objc private func imageTapped() {
@@ -73,7 +76,7 @@ class AddEditCategoryViewController: UIViewController {
     private func uploadDocument(url: String) {
         var docRef: DocumentReference!
         var category = Category(name: nameTextField.text!, id: "", imageUrl: url, timeStamp: Timestamp())
-        docRef = Firestore.firestore().collection("categories").document() //new document
+        docRef = Firestore.firestore().collection("categories").document() //add new document
         category.id = docRef.documentID
         
         let data = Category.modelToData(category: category)

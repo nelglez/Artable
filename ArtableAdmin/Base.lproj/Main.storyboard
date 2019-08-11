@@ -88,6 +88,7 @@
                         <outlet property="collectionView" destination="9ar-q0-ZcT" id="AJf-uv-PW6"/>
                         <outlet property="loginOutButton" destination="qk9-iC-Avu" id="pz7-Zo-x19"/>
                         <segue destination="LQj-EP-8tu" kind="show" identifier="ToAddEditCategory" id="TQI-Sj-Jbe"/>
+                        <segue destination="WXN-r1-eiL" kind="show" identifier="ToProductsVC" id="6k2-ry-IyL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r4B-RO-Owx" sceneMemberID="firstResponder"/>
@@ -177,9 +178,67 @@
             </objects>
             <point key="canvasLocation" x="1805.7971014492755" y="72.991071428571431"/>
         </scene>
+        <!--Admin Products View Controller-->
+        <scene sceneID="j91-It-T3m">
+            <objects>
+                <viewController id="WXN-r1-eiL" customClass="AdminProductsViewController" customModule="ArtableAdmin" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ar3-6F-i7U">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.20000000298023224" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_cat3" translatesAutoresizingMaskIntoConstraints="NO" id="UiK-WZ-6CI">
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Aom-3P-dek">
+                                <rect key="frame" x="2" y="88" width="410" height="774"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="UiK-WZ-6CI" firstAttribute="leading" secondItem="Mwt-A0-zXx" secondAttribute="leading" id="97D-4d-Y0x"/>
+                            <constraint firstItem="Mwt-A0-zXx" firstAttribute="trailing" secondItem="Aom-3P-dek" secondAttribute="trailing" constant="2" id="Syo-cM-jH7"/>
+                            <constraint firstItem="Aom-3P-dek" firstAttribute="top" secondItem="Mwt-A0-zXx" secondAttribute="top" id="c14-r7-2Pp"/>
+                            <constraint firstItem="UiK-WZ-6CI" firstAttribute="trailing" secondItem="Mwt-A0-zXx" secondAttribute="trailing" id="cZD-Zl-Q8C"/>
+                            <constraint firstItem="Aom-3P-dek" firstAttribute="leading" secondItem="Mwt-A0-zXx" secondAttribute="leading" constant="2" id="gRj-BW-2F5"/>
+                            <constraint firstAttribute="bottom" secondItem="UiK-WZ-6CI" secondAttribute="bottom" id="hqP-RJ-jzJ"/>
+                            <constraint firstItem="Mwt-A0-zXx" firstAttribute="bottom" secondItem="Aom-3P-dek" secondAttribute="bottom" id="m6R-9v-7q6"/>
+                            <constraint firstItem="UiK-WZ-6CI" firstAttribute="top" secondItem="Mwt-A0-zXx" secondAttribute="top" id="yfr-bA-YSo"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Mwt-A0-zXx"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="rwX-ou-Bdo"/>
+                    <connections>
+                        <outlet property="tableView" destination="Aom-3P-dek" id="ZKT-AF-Mj1"/>
+                        <segue destination="zvL-4O-5LB" kind="show" identifier="ToAddEditProduct" id="nK0-3b-2H0"/>
+                        <segue destination="LQj-EP-8tu" kind="show" identifier="ToEditCategory" id="u0z-JQ-H4d"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0gu-g0-7JA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1041" y="757"/>
+        </scene>
+        <!--Add Edit Products View Controller-->
+        <scene sceneID="IWz-G5-RWn">
+            <objects>
+                <viewController id="zvL-4O-5LB" customClass="AddEditProductsViewController" customModule="ArtableAdmin" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6zf-kb-IaH">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="rZi-8k-5hv"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xS7-t9-yHc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1750" y="758"/>
+        </scene>
     </scenes>
     <resources>
         <image name="bg_cat3" width="1500" height="1875"/>
         <image name="camera" width="66" height="54"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="TQI-Sj-Jbe"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -45,6 +45,8 @@
 		7A01D10222FDAE3F006A93B3 /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A01D0F822FDA41D006A93B3 /* ProductDetailViewController.swift */; };
 		7A01D10322FDAE52006A93B3 /* ProductDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A01D0F922FDA41D006A93B3 /* ProductDetailViewController.xib */; };
 		7A01D10522FDAFE8006A93B3 /* AddEditCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A01D10422FDAFE8006A93B3 /* AddEditCategoryViewController.swift */; };
+		7A01D10A22FE1626006A93B3 /* AdminProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A01D10922FE1626006A93B3 /* AdminProductsViewController.swift */; };
+		7A01D10C23009F07006A93B3 /* AddEditProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A01D10B23009F07006A93B3 /* AddEditProductsViewController.swift */; };
 		7A4C7EA222FB591000C88521 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4C7EA122FB591000C88521 /* AppDelegate.swift */; };
 		7A4C7EA422FB591000C88521 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4C7EA322FB591000C88521 /* HomeViewController.swift */; };
 		7A4C7EA722FB591000C88521 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A4C7EA522FB591000C88521 /* Main.storyboard */; };
@@ -82,6 +84,8 @@
 		7A01D0F922FDA41D006A93B3 /* ProductDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductDetailViewController.xib; sourceTree = "<group>"; };
 		7A01D0FC22FDACF6006A93B3 /* AdminHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminHomeViewController.swift; sourceTree = "<group>"; };
 		7A01D10422FDAFE8006A93B3 /* AddEditCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditCategoryViewController.swift; sourceTree = "<group>"; };
+		7A01D10922FE1626006A93B3 /* AdminProductsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminProductsViewController.swift; sourceTree = "<group>"; };
+		7A01D10B23009F07006A93B3 /* AddEditProductsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditProductsViewController.swift; sourceTree = "<group>"; };
 		7A4C7E9E22FB591000C88521 /* Artable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Artable.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A4C7EA122FB591000C88521 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7A4C7EA322FB591000C88521 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -212,6 +216,8 @@
 			children = (
 				7A01D0FC22FDACF6006A93B3 /* AdminHomeViewController.swift */,
 				7A01D10422FDAFE8006A93B3 /* AddEditCategoryViewController.swift */,
+				7A01D10922FE1626006A93B3 /* AdminProductsViewController.swift */,
+				7A01D10B23009F07006A93B3 /* AddEditProductsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -504,6 +510,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A01D10C23009F07006A93B3 /* AddEditProductsViewController.swift in Sources */,
 				7A01D0EE22FC8F36006A93B3 /* ProductsViewController.swift in Sources */,
 				7A01D10022FDAE17006A93B3 /* Constants.swift in Sources */,
 				7A01D10522FDAFE8006A93B3 /* AddEditCategoryViewController.swift in Sources */,
@@ -512,6 +519,7 @@
 				7A01D10222FDAE3F006A93B3 /* ProductDetailViewController.swift in Sources */,
 				7A01D0F522FC904F006A93B3 /* ProductTableViewCell.swift in Sources */,
 				7A01D0EB22FC8490006A93B3 /* CategoryCollectionViewCell.swift in Sources */,
+				7A01D10A22FE1626006A93B3 /* AdminProductsViewController.swift in Sources */,
 				7A01D0E022FC7ED1006A93B3 /* Firebase+Utilities.swift in Sources */,
 				7A01D10122FDAE21006A93B3 /* Extensions.swift in Sources */,
 				7A01D0FE22FDAD1E006A93B3 /* HomeViewController.swift in Sources */,
