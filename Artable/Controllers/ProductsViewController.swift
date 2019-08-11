@@ -23,10 +23,15 @@ class ProductsViewController: UIViewController {
         
         db = Firestore.firestore()
         
-        setProductsListener()
+      //  setProductsListener()
 
         setupTableView()
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setProductsListener()
     }
     
     override func viewWillDisappear(_ animated: Bool) {

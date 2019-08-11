@@ -170,6 +170,7 @@
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="t50-V6-lTv" id="Gc1-Ls-Tgy"/>
+                        <outlet property="addButton" destination="CgO-7b-9rx" id="tGa-ha-eeM"/>
                         <outlet property="categoryImage" destination="bGh-nC-NFg" id="Deq-xC-xrJ"/>
                         <outlet property="nameTextField" destination="YHM-GE-Xon" id="zKg-Pd-VAe"/>
                     </connections>
@@ -239,6 +240,6 @@
         <image name="camera" width="66" height="54"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="TQI-Sj-Jbe"/>
+        <segue reference="u0z-JQ-H4d"/>
     </inferredMetricsTieBreakers>
 </document>
