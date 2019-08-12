@@ -66,19 +66,57 @@ class RegisterViewController: UIViewController {
         
         activityIndicator.startAnimating()
         
+        //Without linking accounts
+//        Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
+//            if let error = error {
+//                print("Error signing user up with email and password: \(error.localizedDescription)")
+//                Auth.auth().handleFireAuthError(error: error, vc: self)
+//                return
+//            }
+//
+//            guard let firUser = result?.user else { return }
+//
+//            let artUser = User(id: firUser.uid, email: email, username: username, stripeId: "")
+//            //Upload to Firestore
+//            self.createFirestoreUser(user: artUser)
+//
+//        }
+        
+        //With linking accounts.
+        
         guard let authUser = Auth.auth().currentUser else { return }
-        
+
         let credential = EmailAuthProvider.credential(withEmail: email, password: password)
-        
+
         authUser.link(with: credential) { (result, error) in
             if let error = error {
                 print("Error signing user up with email and password: \(error.localizedDescription)")
                 Auth.auth().handleFireAuthError(error: error, vc: self)
                 return
             }
+
+            guard let firUser = result?.user else { return }
             
+            let artUser = User(id: firUser.uid, email: email, username: username, stripeId: "")
+            //Upload to Firestore
+            self.createFirestoreUser(user: artUser)
+        }
+    }
+    
+    private func createFirestoreUser(user: User) {
+        //Create document Ref
+        let newUserRef = Firestore.firestore().collection("users").document(user.id)
+        //Create Model Data
+        let data = User.modelToData(user: user)
+        //Upload to fireStore
+        newUserRef.setData(data) { (error) in
+            if let error = error {
+                Auth.auth().handleFireAuthError(error: error, vc: self)
+                print("Unable to upload user: \(error.localizedDescription)")
+            } else {
+                self.dismiss(animated: true, completion: nil)
+            }
             self.activityIndicator.stopAnimating()
-            self.dismiss(animated: true, completion: nil)
         }
     }
    
