@@ -45,8 +45,7 @@ class AddEditCategoryViewController: UIViewController {
     }
 
     @IBAction func addCategoryButtonPressed(_ sender: UIButton) {
-        
-        activityIndicator.startAnimating()
+
         uploadImageThenDocument()
     }
     
@@ -55,6 +54,9 @@ class AddEditCategoryViewController: UIViewController {
             simpleAlert(title: "Error", message: "Must have category image and name.")
             return
         }
+        
+        activityIndicator.startAnimating()
+        
         //Turn image into data
         guard let imageData = image.jpegData(compressionQuality: 0.2) else { return }//1. full resolution. 0. compressed
         
