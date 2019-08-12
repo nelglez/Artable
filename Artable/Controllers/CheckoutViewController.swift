@@ -8,7 +8,8 @@
 
 import UIKit
 
-class CheckoutViewController: UIViewController {
+class CheckoutViewController: UIViewController, CartItemDelegate {
+ 
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var paymentMethodButton: UIButton!
@@ -19,10 +20,7 @@ class CheckoutViewController: UIViewController {
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    
-    
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -43,6 +41,13 @@ class CheckoutViewController: UIViewController {
         processingFeeLabel.text = StripeCart.processingFees.penniesToFormattedCurrency()
         shippingCostLabel.text = StripeCart.shippingFees.penniesToFormattedCurrency()
         totalLabel.text = StripeCart.total.penniesToFormattedCurrency()
+    }
+    
+    func removeItem(product: Product) {
+        StripeCart.removeItemFromCart(item: product)
+        tableView.reloadData()
+        
+        setupPaymentInfo()
     }
     
     @IBAction func placeOrderButtonPressed(_ sender: UIButton) {
@@ -72,7 +77,7 @@ extension CheckoutViewController: UITableViewDelegate, UITableViewDataSource {
         if let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.CartItemCell, for: indexPath) as? CartItemTableViewCell {
             
             let product = StripeCart.cartItems[indexPath.row]
-            cell.configureCell(product: product)
+            cell.configureCell(product: product, delegate: self)
             
             return cell
         }

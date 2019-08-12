@@ -10,7 +10,7 @@ import UIKit
 import FirebaseFirestore
 
 class ProductsViewController: UIViewController, ProductCellDelegate {
-   
+    
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -90,6 +90,9 @@ class ProductsViewController: UIViewController, ProductCellDelegate {
         tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
     }
     
+    func productAddToCart(product: Product) {
+        StripeCart.addItemToCart(item: product)
+    }
 
 }
 

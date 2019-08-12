@@ -36,7 +36,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product Title $99.99" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pQM-OZ-3Qz">
-                                <rect key="frame" x="66.5" y="22" width="158" height="23"/>
+                                <rect key="frame" x="70.5" y="22" width="158" height="23"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                 <color key="textColor" red="0.2274509804" green="0.2666666667" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -44,13 +44,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="3le-VC-li9" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="pQM-OZ-3Qz" secondAttribute="trailing" constant="12" id="27m-JK-pob"/>
                             <constraint firstItem="3le-VC-li9" firstAttribute="centerY" secondItem="cgc-KS-iNU" secondAttribute="centerY" id="G81-y7-8vU"/>
                             <constraint firstAttribute="bottom" secondItem="PEn-0D-hUq" secondAttribute="bottom" constant="8" id="GLc-fO-P4x"/>
-                            <constraint firstItem="pQM-OZ-3Qz" firstAttribute="leading" secondItem="PEn-0D-hUq" secondAttribute="trailing" constant="8" id="Pth-4O-w9D"/>
+                            <constraint firstItem="pQM-OZ-3Qz" firstAttribute="leading" secondItem="PEn-0D-hUq" secondAttribute="trailing" constant="12" id="Pth-4O-w9D"/>
                             <constraint firstItem="PEn-0D-hUq" firstAttribute="leading" secondItem="cgc-KS-iNU" secondAttribute="leading" constant="8" id="drJ-lJ-edw"/>
+                            <constraint firstItem="pQM-OZ-3Qz" firstAttribute="centerY" secondItem="cgc-KS-iNU" secondAttribute="centerY" id="nMm-B4-AU3"/>
                             <constraint firstItem="PEn-0D-hUq" firstAttribute="top" secondItem="cgc-KS-iNU" secondAttribute="top" constant="8" id="oU0-gi-zk4"/>
                             <constraint firstAttribute="trailing" secondItem="3le-VC-li9" secondAttribute="trailing" constant="12" id="xMr-L8-56b"/>
-                            <constraint firstItem="pQM-OZ-3Qz" firstAttribute="centerY" secondItem="cgc-KS-iNU" secondAttribute="centerY" id="zSZ-xl-liX"/>
                         </constraints>
                     </view>
                 </subviews>

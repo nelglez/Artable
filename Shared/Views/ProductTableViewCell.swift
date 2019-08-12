@@ -11,6 +11,7 @@ import Kingfisher
 
 protocol ProductCellDelegate: class {
     func productFavorited(product: Product)
+    func productAddToCart(product: Product)
 }
 
 class ProductTableViewCell: UITableViewCell {
@@ -55,6 +56,7 @@ class ProductTableViewCell: UITableViewCell {
     
 
     @IBAction func addToCartButtonPressed(_ sender: UIButton) {
+        delegate?.productAddToCart(product: product)
     }
     
     @IBAction func favoriteButtonPressed(_ sender: UIButton) {
