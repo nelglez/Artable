@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Stripe
 
 class CheckoutViewController: UIViewController, CartItemDelegate {
  
@@ -20,13 +21,14 @@ class CheckoutViewController: UIViewController, CartItemDelegate {
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
+    var paymentContext: STPPaymentContext!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
        setupTableView()
         setupPaymentInfo()
-        
+        setupStripeConfig()
     }
     
     private func setupTableView() {
@@ -48,6 +50,20 @@ class CheckoutViewController: UIViewController, CartItemDelegate {
         tableView.reloadData()
         
         setupPaymentInfo()
+        paymentContext.paymentAmount = StripeCart.total
+    }
+    //https://github.com/kboy-silvergym/stripe-payments-firebase/blob/master/iOS/StripePaymentsSample/ViewController.swift
+    private func setupStripeConfig() {
+        let config = STPPaymentConfiguration.shared()
+        config.requiredBillingAddressFields = .full
+        
+        config.requiredShippingAddressFields = [.postalAddress]
+        
+        let customerContext = STPCustomerContext(keyProvider: StripeApi)
+        paymentContext = STPPaymentContext(customerContext: customerContext, configuration: config, theme: .default())
+        paymentContext.paymentAmount = StripeCart.total
+        paymentContext.delegate = self
+        paymentContext.hostViewController = self
     }
     
     @IBAction func placeOrderButtonPressed(_ sender: UIButton) {
@@ -55,16 +71,38 @@ class CheckoutViewController: UIViewController, CartItemDelegate {
         
     }
     @IBAction func paymentMothodButtonPressed(_ sender: UIButton) {
-        
+        paymentContext.pushPaymentOptionsViewController()
         
     }
     @IBAction func shippingMethodPressed(_ sender: UIButton) {
         
-        
+        paymentContext.pushShippingViewController()
     }
     
    
 
+}
+
+extension CheckoutViewController: STPPaymentContextDelegate {
+    func paymentContextDidChange(_ paymentContext: STPPaymentContext) {
+        
+    }
+    
+    
+    func paymentContext(_ paymentContext: STPPaymentContext, didFailToLoadWithError error: Error) {
+        
+    }
+    
+    func paymentContext(_ paymentContext: STPPaymentContext, didCreatePaymentResult paymentResult: STPPaymentResult, completion: @escaping STPErrorBlock) {
+        
+    }
+    
+    func paymentContext(_ paymentContext: STPPaymentContext, didFinishWith status: STPPaymentStatus, error: Error?) {
+        
+    }
+    
+    
+    
 }
 
 extension CheckoutViewController: UITableViewDelegate, UITableViewDataSource {
