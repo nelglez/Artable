@@ -53,6 +53,7 @@
 		7A01D1162301EC34006A93B3 /* CartItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A01D1142301EC33006A93B3 /* CartItemTableViewCell.swift */; };
 		7A01D1172301EC34006A93B3 /* CartItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A01D1152301EC33006A93B3 /* CartItemTableViewCell.xib */; };
 		7A01D11A2301EFF5006A93B3 /* StripeCart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A01D1192301EFF5006A93B3 /* StripeCart.swift */; };
+		7A01D11C23020FB7006A93B3 /* StripeApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A01D11B23020FB6006A93B3 /* StripeApi.swift */; };
 		7A4C7EA222FB591000C88521 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4C7EA122FB591000C88521 /* AppDelegate.swift */; };
 		7A4C7EA422FB591000C88521 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4C7EA322FB591000C88521 /* HomeViewController.swift */; };
 		7A4C7EA722FB591000C88521 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A4C7EA522FB591000C88521 /* Main.storyboard */; };
@@ -98,6 +99,7 @@
 		7A01D1142301EC33006A93B3 /* CartItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartItemTableViewCell.swift; sourceTree = "<group>"; };
 		7A01D1152301EC33006A93B3 /* CartItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartItemTableViewCell.xib; sourceTree = "<group>"; };
 		7A01D1192301EFF5006A93B3 /* StripeCart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StripeCart.swift; sourceTree = "<group>"; };
+		7A01D11B23020FB6006A93B3 /* StripeApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StripeApi.swift; sourceTree = "<group>"; };
 		7A4C7E9E22FB591000C88521 /* Artable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Artable.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A4C7EA122FB591000C88521 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7A4C7EA322FB591000C88521 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -250,6 +252,7 @@
 			isa = PBXGroup;
 			children = (
 				7A01D1192301EFF5006A93B3 /* StripeCart.swift */,
+				7A01D11B23020FB6006A93B3 /* StripeApi.swift */,
 			);
 			name = Stripe;
 			path = ..;
@@ -527,6 +530,7 @@
 				7A01D11A2301EFF5006A93B3 /* StripeCart.swift in Sources */,
 				7A01D0DC22FC7854006A93B3 /* ForgotPasswordViewController.swift in Sources */,
 				7A01D0E222FC81F3006A93B3 /* Category.swift in Sources */,
+				7A01D11C23020FB7006A93B3 /* StripeApi.swift in Sources */,
 				7A01D0FA22FDA41D006A93B3 /* ProductDetailViewController.swift in Sources */,
 				7A01D0D322FC4FB4006A93B3 /* Extensions.swift in Sources */,
 				7A01D10E2301B139006A93B3 /* User.swift in Sources */,
