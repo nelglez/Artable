@@ -9,7 +9,8 @@
 import UIKit
 import FirebaseFirestore
 
-class ProductsViewController: UIViewController {
+class ProductsViewController: UIViewController, ProductCellDelegate {
+   
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -17,6 +18,8 @@ class ProductsViewController: UIViewController {
     var category: Category!
     var listener: ListenerRegistration!
     var db: Firestore!
+    var showFavorites = false
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +52,15 @@ class ProductsViewController: UIViewController {
     }
     
     private func setProductsListener() {
-        listener = db.products(category: category.id).addSnapshotListener({ (snapshot, error) in
+        
+        var ref: Query!
+        if showFavorites {
+            ref = db.collection("users").document(UserService.user.id).collection("favorites")
+        } else {
+            ref = db.products(category: category.id)
+        }
+        
+        listener = ref.addSnapshotListener({ (snapshot, error) in
             if let error = error {
                 print(error.localizedDescription)
                 return
@@ -71,6 +82,14 @@ class ProductsViewController: UIViewController {
             })
         })
     }
+    
+    func productFavorited(product: Product) {
+        UserService.favoriteSelected(product: product)
+        
+        guard let index = products.firstIndex(of: product) else { return }
+        tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+    }
+    
 
 }
 
@@ -114,7 +133,7 @@ extension ProductsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.ProductCell, for: indexPath) as? ProductTableViewCell {
             
-            cell.configureCell(product: products[indexPath.row])
+            cell.configureCell(product: products[indexPath.row], delegate: self)
             return cell
         }
         return UITableViewCell()

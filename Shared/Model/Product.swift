@@ -60,3 +60,11 @@ struct Product {
         return data
     }
 }
+
+extension Product: Equatable {
+    static func ==(lhs: Product, rhs: Product) -> Bool {
+        //Criteria for comparing
+        //if they match then its the same product!
+        return lhs.id == rhs.id
+    }
+}
