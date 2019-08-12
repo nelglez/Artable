@@ -284,7 +284,7 @@
                                 </subviews>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="G2M-hp-lTv">
-                                <rect key="frame" x="20" y="108" width="374" height="435"/>
+                                <rect key="frame" x="6" y="108" width="402" height="435"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
@@ -294,12 +294,12 @@
                             <constraint firstItem="tHv-WP-wo4" firstAttribute="top" secondItem="5FY-WV-XHn" secondAttribute="bottom" constant="6" id="7zI-eQ-3qy"/>
                             <constraint firstItem="fCf-h1-uzZ" firstAttribute="trailing" secondItem="vjd-Fe-2Gh" secondAttribute="trailing" constant="20" id="90g-SQ-tyK"/>
                             <constraint firstAttribute="bottomMargin" secondItem="tHv-WP-wo4" secondAttribute="bottom" constant="20" id="9hj-c3-UTF"/>
-                            <constraint firstItem="G2M-hp-lTv" firstAttribute="leading" secondItem="fCf-h1-uzZ" secondAttribute="leading" constant="20" id="OyY-ci-xOo"/>
+                            <constraint firstItem="G2M-hp-lTv" firstAttribute="leading" secondItem="fCf-h1-uzZ" secondAttribute="leading" constant="6" id="OyY-ci-xOo"/>
                             <constraint firstItem="fCf-h1-uzZ" firstAttribute="trailing" secondItem="tHv-WP-wo4" secondAttribute="trailing" constant="20" id="RBf-HH-1eZ"/>
                             <constraint firstItem="G2M-hp-lTv" firstAttribute="top" secondItem="fCf-h1-uzZ" secondAttribute="top" constant="20" id="ZVk-ih-QB4"/>
                             <constraint firstItem="vjd-Fe-2Gh" firstAttribute="leading" secondItem="fCf-h1-uzZ" secondAttribute="leading" constant="20" id="c5u-Mt-mua"/>
                             <constraint firstItem="5FY-WV-XHn" firstAttribute="centerX" secondItem="vah-Ee-Ipi" secondAttribute="centerX" id="f0j-rB-aNG"/>
-                            <constraint firstItem="fCf-h1-uzZ" firstAttribute="trailing" secondItem="G2M-hp-lTv" secondAttribute="trailing" constant="20" id="jt0-gU-afY"/>
+                            <constraint firstItem="fCf-h1-uzZ" firstAttribute="trailing" secondItem="G2M-hp-lTv" secondAttribute="trailing" constant="6" id="jt0-gU-afY"/>
                             <constraint firstItem="vjd-Fe-2Gh" firstAttribute="top" secondItem="G2M-hp-lTv" secondAttribute="bottom" constant="20" id="lez-o9-wvm"/>
                             <constraint firstItem="tHv-WP-wo4" firstAttribute="top" secondItem="vjd-Fe-2Gh" secondAttribute="bottom" constant="30" id="oR1-Yg-voN"/>
                         </constraints>
