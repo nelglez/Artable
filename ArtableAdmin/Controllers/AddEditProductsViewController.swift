@@ -35,6 +35,19 @@ class AddEditProductsViewController: UIViewController {
         productImageView.clipsToBounds = true
         productImageView.addGestureRecognizer(tap)
         
+        if let product = productToEdit {
+            productNameTextField.text = product.name
+            productDescriptionTextView.text = product.productDescription
+            productPriceTextField.text = String(product.price)
+            
+            addButton.setTitle("Save Changes", for: .normal)
+            
+            if let url = URL(string: product.imageUrl) {
+                productImageView.contentMode = .scaleAspectFill
+                productImageView.kf.setImage(with: url)
+            }
+        }
+        
     }
     
     @objc private func imageTapped() {
@@ -111,7 +124,7 @@ class AddEditProductsViewController: UIViewController {
         docRef.setData(data, merge: true) { (error) in
             if let error = error {
                 print(error.localizedDescription)
-                self.handleError(error: error, message: "Unable to upload new product to firestore.")
+                self.handleError(error: error, message: "Unable to upload new product document to firestore.")
                 return
             }
             self.navigationController?.popViewController(animated: true)

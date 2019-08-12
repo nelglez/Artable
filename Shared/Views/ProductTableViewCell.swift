@@ -30,7 +30,10 @@ class ProductTableViewCell: UITableViewCell {
             productPriceLabel.text = price
         }
         if let url = URL(string: product.imageUrl) {
-            productImage.kf.setImage(with: url)
+            let placeholder = UIImage(named: "placeholder")
+            productImage.kf.indicatorType = .activity
+            let options: KingfisherOptionsInfo = [.transition(.fade(0.2))]
+            productImage.kf.setImage(with: url, placeholder: placeholder, options: options)
         }
     }
     
