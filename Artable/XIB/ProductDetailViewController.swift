@@ -47,7 +47,7 @@ class ProductDetailViewController: UIViewController {
 
     @IBAction func addToCartButtonPressed(_ sender: UIButton) {
         //Add product to cart
-        
+        StripeCart.addItemToCart(item: product)
         dismiss(animated: true, completion: nil)
     }
     

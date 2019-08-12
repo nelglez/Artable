@@ -26,16 +26,50 @@ class CheckoutViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-       
+       tableView.delegate = self
+        tableView.dataSource = self
+        
+        tableView.register(UINib(nibName: Identifiers.cartItemCellNibFileName, bundle: nil), forCellReuseIdentifier: Identifiers.CartItemCell)
     }
     
     @IBAction func placeOrderButtonPressed(_ sender: UIButton) {
+        
+        
     }
     @IBAction func paymentMothodButtonPressed(_ sender: UIButton) {
+        
+        
     }
     @IBAction func shippingMethodPressed(_ sender: UIButton) {
+        
+        
     }
     
    
 
+}
+
+extension CheckoutViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return StripeCart.cartItems.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.CartItemCell, for: indexPath) as? CartItemTableViewCell {
+            
+            let product = StripeCart.cartItems[indexPath.row]
+            cell.configureCell(product: product)
+            
+            return cell
+        }
+        
+        return UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
+    
+    
 }

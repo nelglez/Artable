@@ -35,6 +35,8 @@ struct Identifiers {
     static let CategoryCellNibFile = "CategoryCollectionViewCell"
     static let ProductCell = "ProductCell"
     static let ProductCellNibFile = "ProductTableViewCell"
+    static let CartItemCell = "CartItemCell"
+    static let cartItemCellNibFileName = "CartItemTableViewCell"
 }
 
 struct Segues {

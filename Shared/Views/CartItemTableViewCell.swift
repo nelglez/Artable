@@ -20,6 +20,17 @@ class CartItemTableViewCell: UITableViewCell {
         
     }
 
+    func configureCell(product: Product) {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        if let price = formatter.string(from: product.price as NSNumber) {
+        productTitleLabel.text = "\(product.name) \(price)"
+        }
+        
+        if let url = URL(string: product.imageUrl) {
+            productImage.kf.setImage(with: url)
+        }
+    }
     
     @IBAction func removeItemButtonPressed(_ sender: UIButton) {
     }
