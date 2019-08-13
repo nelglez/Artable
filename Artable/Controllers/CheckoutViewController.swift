@@ -85,7 +85,23 @@ class CheckoutViewController: UIViewController, CartItemDelegate {
 
 extension CheckoutViewController: STPPaymentContextDelegate {
     func paymentContextDidChange(_ paymentContext: STPPaymentContext) {
+       //Updating the selected payment method
+        if let paymentOption = paymentContext.selectedPaymentOption {
+            paymentMethodButton.setTitle(paymentOption.label, for: .normal)
+        } else {
+            paymentMethodButton.setTitle("Select Method", for: .normal)
+        }
         
+        //updating the selected shipping method
+        
+        if let shippingMethod = paymentContext.selectedShippingMethod {
+            shippingMethodButton.setTitle(shippingMethod.label, for: .normal)
+            //Add shipping fees to total
+            StripeCart.shippingFees = Int(Double(truncating: shippingMethod.amount) * 100)
+            setupPaymentInfo()
+        } else {
+            shippingMethodButton.setTitle("Select Method", for: .normal)
+        }
     }
     
     
@@ -100,7 +116,28 @@ extension CheckoutViewController: STPPaymentContextDelegate {
     func paymentContext(_ paymentContext: STPPaymentContext, didFinishWith status: STPPaymentStatus, error: Error?) {
         
     }
-    
+    //Select shipping method
+    func paymentContext(_ paymentContext: STPPaymentContext, didUpdateShippingAddress address: STPAddress, completion: @escaping STPShippingMethodsCompletionBlock) {
+        
+        let upsGround = PKShippingMethod()
+        upsGround.amount = 0
+        upsGround.label = "UPS Ground"
+        upsGround.detail = "Arrives in 3-5 days"
+        upsGround.identifier = "ups_ground"
+        
+        let fedex = PKShippingMethod()
+        fedex.amount = 6.99
+        fedex.label = "FedEx"
+        fedex.detail = "Arrives tomorrow"
+        fedex.identifier = "fedex"
+        //Address Validation
+        if address.country == "US" {
+            completion(.valid, nil, [upsGround, fedex], nil /*'fedex' to select a default shipping*/)
+        } else {
+            completion(.invalid, nil, nil, nil)
+        }
+        
+    }
     
     
 }
