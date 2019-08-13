@@ -106,7 +106,19 @@ extension CheckoutViewController: STPPaymentContextDelegate {
     
     
     func paymentContext(_ paymentContext: STPPaymentContext, didFailToLoadWithError error: Error) {
+        activityIndicator.stopAnimating()
+        let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+            self.navigationController?.popViewController(animated: true)
+        }
+        let retry = UIAlertAction(title: "Retry", style: .default) { (action) in
+            self.paymentContext.retryLoading()
+        }
         
+        alert.addAction(cancel)
+        alert.addAction(retry)
+        
+        present(alert, animated: true, completion: nil)
     }
     
     func paymentContext(_ paymentContext: STPPaymentContext, didCreatePaymentResult paymentResult: STPPaymentResult, completion: @escaping STPErrorBlock) {
