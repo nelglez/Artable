@@ -8,6 +8,7 @@
 
 import UIKit
 import Stripe
+import FirebaseFunctions
 
 class CheckoutViewController: UIViewController, CartItemDelegate {
  
@@ -68,6 +69,8 @@ class CheckoutViewController: UIViewController, CartItemDelegate {
     
     @IBAction func placeOrderButtonPressed(_ sender: UIButton) {
         
+        paymentContext.requestPayment()
+        activityIndicator.startAnimating()
         
     }
     @IBAction func paymentMothodButtonPressed(_ sender: UIButton) {
@@ -123,14 +126,61 @@ extension CheckoutViewController: STPPaymentContextDelegate {
     
     func paymentContext(_ paymentContext: STPPaymentContext, didCreatePaymentResult paymentResult: STPPaymentResult, completion: @escaping STPErrorBlock) {
         
+        let idempotency = UUID().uuidString.replacingOccurrences(of: "-", with: "")
+        
+        let data: [String: Any] = [
+            "total": StripeCart.total,
+            "customerId": UserService.user.stripeId,
+            "idempotency": idempotency
+        ]
+        
+        Functions.functions().httpsCallable("makeCharge").call(data) { (result, error) in
+            
+            if let error = error {
+                print(error.localizedDescription)
+                self.simpleAlert(title: "Error", message: "Unable to make charge.")
+                completion(error)
+                return
+            }
+            
+            StripeCart.clearCart()
+            self.tableView.reloadData()
+            self.setupPaymentInfo()
+            completion(nil)
+            
+        }
     }
     
     func paymentContext(_ paymentContext: STPPaymentContext, didFinishWith status: STPPaymentStatus, error: Error?) {
+        let title: String
+        let message: String
+        
+        switch status {
+        case .success:
+            activityIndicator.stopAnimating()
+            title = "Success!"
+            message = "Thank you for your purchase."
+       case .error:
+            activityIndicator.stopAnimating()
+            title = "Error"
+            message = error?.localizedDescription ?? ""
+        case .userCancellation:
+            return
+        }
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "OK", style: .default) { (action) in
+            self.navigationController?.popViewController(animated: true)
+        }
+        alert.addAction(action)
+        
+        self.present(alert, animated: true, completion: nil)
         
     }
     //Select shipping method
     func paymentContext(_ paymentContext: STPPaymentContext, didUpdateShippingAddress address: STPAddress, completion: @escaping STPShippingMethodsCompletionBlock) {
-        
+        //Add shipping options
         let upsGround = PKShippingMethod()
         upsGround.amount = 0
         upsGround.label = "UPS Ground"
